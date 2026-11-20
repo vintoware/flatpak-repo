@@ -4,6 +4,6 @@
   "branch": "master",
   "version": "4.53.287",
   "bundle_url": "https://github.com/vintoware/slack-arm64-flatpak/releases/download/v4.53.287/com.slack.Slack.aarch64.flatpak",
-  "bundle_sha256": "326ecd8826aeb4bf3dcca86fc2b5a75fc66d01ed757d4ba74930b0d9c712ccd0",
+  "bundle_sha256": "82f75b3cc0a7a63d5b5d47ab2282f6d49c08d306cfa78e979ac646f1bb486fbe",
   "source": "https://github.com/vintoware/slack-arm64-flatpak/releases/tag/v4.53.287"
 }
