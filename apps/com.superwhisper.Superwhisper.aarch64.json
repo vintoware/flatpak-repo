@@ -2,8 +2,8 @@
   "id": "com.superwhisper.Superwhisper",
   "arch": "aarch64",
   "branch": "stable",
-  "version": "1.3.1-1",
-  "bundle_url": "https://github.com/vintoware/superwhisper-flatpak/releases/download/v1.3.1-1/com.superwhisper.Superwhisper.aarch64.flatpak",
-  "bundle_sha256": "9ce0e32a25b7bbfa655fb4b8b26afc1b78d01c22635f76f4767080414c68ade4",
-  "source": "https://github.com/vintoware/superwhisper-flatpak/releases/tag/v1.3.1-1"
+  "version": "1.3.1-2",
+  "bundle_url": "https://github.com/vintoware/superwhisper-flatpak/releases/download/v1.3.1-2/com.superwhisper.Superwhisper.aarch64.flatpak",
+  "bundle_sha256": "e1786a4fb75c93d238829671fa1e531784170601f6b73427c3632f340f6606dc",
+  "source": "https://github.com/vintoware/superwhisper-flatpak/releases/tag/v1.3.1-2"
 }
