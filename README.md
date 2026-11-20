@@ -7,11 +7,13 @@ A personal Flatpak repository served from GitHub Pages:
 flatpak remote-add --user --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 flatpak remote-add --user --if-not-exists vintoware https://vintoware.github.io/flatpak-repo/vintoware.flatpakrepo
 flatpak install --user vintoware com.slack.Slack
+flatpak install --user vintoware com.superwhisper.Superwhisper
 ```
 
 | App | Arch | Built by |
 |-----|------|----------|
 | `com.slack.Slack` (unofficial) | aarch64 | [slack-arm64-flatpak](https://github.com/vintoware/slack-arm64-flatpak) |
+| `com.superwhisper.Superwhisper` (unofficial) | x86_64, aarch64 | [superwhisper-flatpak](https://github.com/vintoware/superwhisper-flatpak) |
 
 This repo doesn't build anything. It hosts and signs the bundles that app build repos produce.
 
