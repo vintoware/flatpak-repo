@@ -8,14 +8,25 @@ flatpak remote-add --user --if-not-exists flathub https://dl.flathub.org/repo/fl
 flatpak remote-add --user --if-not-exists vintoware https://vintoware.github.io/flatpak-repo/vintoware.flatpakrepo
 flatpak install --user vintoware com.slack.Slack
 flatpak install --user vintoware com.superwhisper.Superwhisper
+flatpak install --user vintoware org.openlogi.OpenLogi
 ```
 
 | App | Arch | Built by |
 |-----|------|----------|
 | `com.slack.Slack` (unofficial) | aarch64 | [slack-arm64-flatpak](https://github.com/vintoware/slack-arm64-flatpak) |
 | `com.superwhisper.Superwhisper` (unofficial) | x86_64, aarch64 | [superwhisper-flatpak](https://github.com/vintoware/superwhisper-flatpak) |
+| `org.openlogi.OpenLogi` | x86_64, aarch64 | upstream: [AprilNEA/OpenLogi](https://github.com/AprilNEA/OpenLogi) releases |
 
-This repo doesn't build anything. It hosts and signs the bundles that app build repos produce.
+This repo doesn't build anything. It hosts and signs the bundles that app build repos produce,
+or that upstream projects attach to their own releases.
+
+OpenLogi needs its udev rules on the host to reach `/dev/hidraw*` and `/dev/uinput`. The
+Flatpak can't install them itself, so install them once:
+
+```sh
+sudo cp ~/.local/share/flatpak/app/org.openlogi.OpenLogi/current/active/files/share/openlogi/udev/70-openlogi.rules /etc/udev/rules.d/
+sudo udevadm control --reload-rules && sudo udevadm trigger
+```
 
 ## How it works
 
@@ -60,6 +71,28 @@ actually changed.
    private half as a secret in the app's build repo.
 2. Have the build repo publish its bundle somewhere public (e.g. a GitHub release) and
    push `apps/<app-id>.<arch>.json`. See `slack-arm64-flatpak`'s `build.yml`.
+
+## Upstream-built apps
+
+When upstream already publishes a Flatpak bundle, there's no build repo. Instead,
+`upstream/<app-id>.json` names the upstream GitHub repo, the release asset for each
+arch (`{tag}` is substituted), and optionally the upstream minisign public key:
+
+```json
+{
+  "id": "org.openlogi.OpenLogi",
+  "branch": "stable",
+  "repo": "AprilNEA/OpenLogi",
+  "minisign_pubkey": "RW…",
+  "assets": { "x86_64": "openlogi-{tag}-linux-amd64.flatpak", "aarch64": "openlogi-{tag}-linux-arm64.flatpak" }
+}
+```
+
+`.github/workflows/sync-upstream.yml` runs every 6 hours (or on demand). `scripts/sync-upstream.sh`
+takes the latest stable (non-prerelease) release and downloads each new bundle. It checks the
+bundle against GitHub's sha256 digest and the pinned minisign key, then rewrites
+`apps/<app-id>.<arch>.json`. The workflow commits that and dispatches `publish.yml`.
+If a release lacks one arch's bundle, that arch stays on its previous version.
 
 ## Signing
 

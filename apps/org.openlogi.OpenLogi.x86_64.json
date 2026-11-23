@@ -1,0 +1,9 @@
+{
+  "id": "org.openlogi.OpenLogi",
+  "arch": "x86_64",
+  "branch": "stable",
+  "version": "0.9.0",
+  "bundle_url": "https://github.com/AprilNEA/OpenLogi/releases/download/v0.9.0/openlogi-v0.9.0-linux-amd64.flatpak",
+  "bundle_sha256": "65e7c7b7225736664043967139b31f3c26dbce4f4b91ed6af17b8505b356a79b",
+  "source": "https://github.com/AprilNEA/OpenLogi/releases/tag/v0.9.0"
+}
